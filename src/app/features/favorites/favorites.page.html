@@ -1,0 +1,28 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="speed-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/tabs/profile"></ion-back-button>
+    </ion-buttons>
+    <h1 slot="start" class="toolbar-title">{{ 'favorites.title' | t }}</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="favorites-content">
+  <div class="cars-grid" *ngIf="cars.length">
+    <div class="car-item" *ngFor="let car of cars" (click)="goToCar(car)">
+      <div class="car-thumb">
+        <img *ngIf="isValidImageUrl(car.image_url)" [src]="car.image_url" [alt]="(car.make || '') + ' ' + (car.model || '')" />
+        <div *ngIf="!isValidImageUrl(car.image_url)" class="car-fallback"><app-car-placeholder /></div>
+      </div>
+      <h4>{{ car.make }} {{ car.model }}</h4>
+      <p><strong>{{ car.daily_rate }}</strong> {{ 'common.currency' | t }} / {{ 'common.day' | t }}</p>
+    </div>
+  </div>
+
+  <div class="speed-empty-state" *ngIf="cars.length === 0 && !loading">
+    <ion-icon name="heart-outline"></ion-icon>
+    <h3>{{ 'favorites.noFavorites' | t }}</h3>
+  </div>
+
+  <div style="height: 100px;"></div>
+</ion-content>

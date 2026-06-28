@@ -1,0 +1,68 @@
+<ion-content [fullscreen]="true" class="list-content">
+  <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="page-header">
+    <h1>{{ (mode === 'rental' ? 'cars.forRent' : 'cars.forSale') | t }}</h1>
+  </div>
+
+  <ion-segment [(ngModel)]="mode" (ionChange)="setMode(mode)" mode="md" class="mode-segment">
+    <ion-segment-button value="rental">
+      <ion-label>{{ 'cars.forRent' | t }}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="sale">
+      <ion-label>{{ 'cars.forSale' | t }}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="search-bar">
+    <ion-icon name="search-outline"></ion-icon>
+    <input type="text" [placeholder]="'cars.searchCar' | t" [(ngModel)]="searchQuery" (input)="onSearch()" />
+  </div>
+
+  <div class="results-row" *ngIf="!loading">
+    <span class="count">{{ cars.length }} {{ 'cars.carsAvailable' | t }}</span>
+  </div>
+
+  <div class="cars-grid" *ngIf="!loading">
+    <div class="car-card" *ngFor="let car of cars" (click)="goToCar(car)">
+      <div class="car-thumb">
+        <img *ngIf="isValidImageUrl(car.image_url)" [src]="car.image_url" [alt]="(car.make || '') + ' ' + (car.model || '')" />
+        <div *ngIf="!isValidImageUrl(car.image_url)" class="car-fallback"><app-car-placeholder /></div>
+        <button class="fav-btn" (click)="toggleFavorite(car, $event)">
+          <ion-icon [name]="isFavorite(car.id) ? 'heart' : 'heart-outline'" [class.is-fav]="isFavorite(car.id)"></ion-icon>
+        </button>
+      </div>
+      <div class="car-body">
+        <h4>{{ car.make }} {{ car.model }}</h4>
+        <p class="car-meta">{{ car.year }} · {{ (car.transmission === 'automatic' ? 'cars.auto' : 'cars.manual') | t }}</p>
+        <div class="car-footer">
+          <div class="car-price" *ngIf="mode === 'rental'">
+            <strong>{{ car.daily_rate }}</strong> {{ 'common.currency' | t }}/{{ 'common.day' | t }}
+          </div>
+          <div class="car-price" *ngIf="mode === 'sale'">
+            <strong>{{ car.sale_price | number }}</strong> {{ 'common.currency' | t }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cars-grid" *ngIf="loading">
+    <div class="car-card skeleton" *ngFor="let i of [1, 2, 3, 4]">
+      <ion-skeleton-text animated class="car-thumb-skel"></ion-skeleton-text>
+      <div class="car-body">
+        <ion-skeleton-text animated style="width: 80%; height: 14px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 50%; height: 12px; margin-top: 6px;"></ion-skeleton-text>
+      </div>
+    </div>
+  </div>
+
+  <div class="speed-empty-state" *ngIf="!loading && !cars.length">
+    <ion-icon name="car-sport-outline"></ion-icon>
+    <p>{{ 'cars.noResults' | t }}</p>
+  </div>
+
+  <div style="height: 90px;"></div>
+</ion-content>

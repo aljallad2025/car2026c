@@ -1,0 +1,51 @@
+<ion-content [fullscreen]="true" class="bookings-content">
+  <div class="speed-page-header"><h1>{{ 'bookings.myBookings' | t }}</h1></div>
+
+  <ion-segment [(ngModel)]="activeTab" (ionChange)="loadBookings()" mode="md" class="status-segment">
+    <ion-segment-button value="active"><ion-label>{{ 'bookings.active' | t }}</ion-label></ion-segment-button>
+    <ion-segment-button value="pending"><ion-label>{{ 'bookings.upcoming' | t }}</ion-label></ion-segment-button>
+    <ion-segment-button value="completed"><ion-label>{{ 'bookings.completed' | t }}</ion-label></ion-segment-button>
+    <ion-segment-button value="cancelled"><ion-label>{{ 'bookings.cancelled' | t }}</ion-label></ion-segment-button>
+  </ion-segment>
+
+  <div class="bookings-list" *ngIf="!loading">
+    <div class="booking-card" *ngFor="let booking of bookings">
+      <div class="booking-header">
+        <div class="car-thumb">
+          <img *ngIf="isValidImageUrl(booking.car?.image_url)" [src]="booking.car?.image_url" [alt]="booking.car?.make" />
+          <div *ngIf="!isValidImageUrl(booking.car?.image_url)" class="car-fallback"><app-car-placeholder /></div>
+        </div>
+        <div class="booking-info">
+          <h4>{{ booking.car?.make }} {{ booking.car?.model }}</h4>
+          <p><ion-icon name="calendar-outline"></ion-icon>{{ booking.start_date | date: 'dd/MM/yyyy' }} → {{ booking.end_date | date: 'dd/MM/yyyy' }}</p>
+        </div>
+        <span class="status" [class]="booking.status">{{ statusKey(booking.status) | t }}</span>
+      </div>
+      <div class="booking-footer">
+        <span class="price">{{ booking.total_amount | number }} <small>{{ 'common.currency' | t }}</small></span>
+        <button *ngIf="booking.status !== 'cancelled' && booking.status !== 'completed'" class="cancel-btn" (click)="cancel(booking)">
+          {{ 'bookings.cancel' | t }}
+        </button>
+      </div>
+    </div>
+
+    <div class="speed-empty-state" *ngIf="bookings.length === 0">
+      <ion-icon name="list-circle-outline"></ion-icon>
+      <h3>{{ 'bookings.noBookings' | t }}</h3>
+    </div>
+  </div>
+
+  <div class="bookings-list" *ngIf="loading">
+    <div class="booking-card skeleton" *ngFor="let i of [1, 2]">
+      <div class="booking-header">
+        <ion-skeleton-text animated class="car-thumb-skel"></ion-skeleton-text>
+        <div class="booking-info">
+          <ion-skeleton-text animated style="width: 60%; height: 14px;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 40%; height: 11px; margin-top: 6px;"></ion-skeleton-text>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 100px;"></div>
+</ion-content>

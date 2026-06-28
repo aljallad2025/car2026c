@@ -1,0 +1,24 @@
+<ion-tabs>
+  <!-- Required for ion-tabs to render its child page content. Omitting it
+       silently breaks the whole layout, including the tab bar itself. -->
+  <ion-router-outlet></ion-router-outlet>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home" href="/tabs/home">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>{{ 'tabs.home' | t }}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="cars" href="/tabs/cars">
+      <ion-icon name="car-sport-outline"></ion-icon>
+      <ion-label>{{ 'tabs.rent' | t }}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="bookings" href="/tabs/bookings">
+      <ion-icon name="list-circle-outline"></ion-icon>
+      <ion-label>{{ 'tabs.bookings' | t }}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="profile" href="/tabs/profile">
+      <ion-icon name="person-circle-outline"></ion-icon>
+      <ion-label>{{ 'tabs.profile' | t }}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

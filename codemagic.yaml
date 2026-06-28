@@ -1,0 +1,30 @@
+workflows:
+  android-build:
+    name: Android Build
+    max_build_duration: 60
+    environment:
+      node: 20.17.0
+      java: 17
+    scripts:
+      - name: Install dependencies
+        script: npm install --legacy-peer-deps
+      - name: Build Angular
+        script: npm run build:prod
+      - name: Setup Android
+        script: |
+          npx cap add android 2>/dev/null || true
+          npx cap sync android
+      - name: Build APK
+        script: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+    artifacts:
+      - android/app/build/outputs/apk/debug/*.apk
+    publishing:
+      email:
+        recipients:
+          - princealjallad@gmail.com
+        notify:
+          success: true
+          failure: true

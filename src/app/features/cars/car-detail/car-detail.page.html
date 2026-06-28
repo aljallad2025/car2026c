@@ -1,0 +1,105 @@
+<ion-content class="detail-content" [fullscreen]="true">
+  <div class="gallery" *ngIf="car">
+    <img *ngIf="isValidImageUrl(car.image_url)" [src]="car.image_url" [alt]="(car.make || '') + ' ' + (car.model || '')" />
+    <div *ngIf="!isValidImageUrl(car.image_url)" class="gallery-fallback"><app-car-placeholder /></div>
+    <div class="gallery-overlay"></div>
+
+    <button class="back-btn" [routerLink]="['..']">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </button>
+
+    <div class="top-actions">
+      <button class="action-btn"><ion-icon name="share-outline"></ion-icon></button>
+      <button class="action-btn" (click)="toggleFavorite()">
+        <ion-icon [name]="isFavorite ? 'heart' : 'heart-outline'" [class.is-fav]="isFavorite"></ion-icon>
+      </button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="car">
+    <div class="sheet">
+      <div class="car-header">
+        <span class="brand-tag">SPEED</span>
+        <h1>{{ car.make }} {{ car.model }}</h1>
+        <div class="car-meta">
+          <span class="rating">
+            <ion-icon name="star-outline"></ion-icon>{{ reviews.length }}
+            {{ (reviews.length === 1 ? 'carDetail.review' : 'carDetail.reviews') | t }}
+          </span>
+          <span class="location" *ngIf="car.location"><ion-icon name="location-outline"></ion-icon>{{ car.location }}</span>
+        </div>
+      </div>
+
+      <div class="specs-grid">
+        <div class="spec">
+          <ion-icon name="people-outline"></ion-icon>
+          <span class="spec-val">{{ car.seats }}</span>
+          <span class="spec-label">{{ 'carDetail.seats' | t }}</span>
+        </div>
+        <div class="spec">
+          <ion-icon name="settings-outline"></ion-icon>
+          <span class="spec-val">{{ (car.transmission === 'automatic' ? 'cars.auto' : 'cars.manual') | t }}</span>
+          <span class="spec-label">{{ 'carDetail.transmission' | t }}</span>
+        </div>
+        <div class="spec">
+          <ion-icon name="flash-outline"></ion-icon>
+          <span class="spec-val">{{ car.fuel_type || '—' }}</span>
+          <span class="spec-label">{{ 'carDetail.fuel' | t }}</span>
+        </div>
+        <div class="spec">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span class="spec-val">{{ car.year }}</span>
+          <span class="spec-label">{{ 'carDetail.year' | t }}</span>
+        </div>
+      </div>
+
+      <!-- Plain buttons with an active class — no ion-segment here by design -->
+      <div class="tab-switch">
+        <button class="tab-btn" [class.active]="activeTab === 'details'" (click)="setTab('details')">
+          {{ 'carDetail.details' | t }}
+        </button>
+        <button class="tab-btn" [class.active]="activeTab === 'features'" (click)="setTab('features')">
+          {{ 'carDetail.features' | t }}
+        </button>
+        <button class="tab-btn" [class.active]="activeTab === 'reviews'" (click)="setTab('reviews')">
+          {{ 'carDetail.reviews' | t }}
+        </button>
+      </div>
+
+      <div class="tab-content" *ngIf="activeTab === 'details'">
+        <p class="description">{{ car.notes || ('carDetail.noDetails' | t) }}</p>
+      </div>
+
+      <div class="tab-content" *ngIf="activeTab === 'features'">
+        <div class="feature-chip" *ngFor="let feature of car.features"><ion-icon name="checkmark-circle"></ion-icon>{{ feature }}</div>
+        <p class="no-data" *ngIf="!car.features?.length">{{ 'carDetail.noFeatures' | t }}</p>
+      </div>
+
+      <div class="tab-content" *ngIf="activeTab === 'reviews'">
+        <div class="review-item" *ngFor="let review of reviews">
+          <div class="reviewer"><ion-icon name="person-circle-outline"></ion-icon>{{ review.user_name }}</div>
+          <div class="stars"><ion-icon name="star-outline"></ion-icon>{{ review.rating }}</div>
+          <p>{{ review.comment }}</p>
+        </div>
+        <p class="no-data" *ngIf="reviews.length === 0">{{ 'carDetail.noReviews' | t }}</p>
+      </div>
+
+      <div style="height: 130px;"></div>
+    </div>
+  </ng-container>
+
+  <div class="bottom-action" *ngIf="car">
+    <div class="price-info">
+      <span class="price" *ngIf="car.daily_rate">{{ car.daily_rate }} <small>{{ 'common.currency' | t }}/{{ 'common.day' | t }}</small></span>
+      <span class="price" *ngIf="car.sale_price && !car.daily_rate">{{ car.sale_price | number }} <small>{{ 'common.currency' | t }}</small></span>
+    </div>
+    <div class="action-btns">
+      <ion-button *ngIf="car.status === 'available' && car.daily_rate" class="primary-btn" (click)="bookRental()">
+        {{ 'carDetail.bookForRent' | t }}
+      </ion-button>
+      <ion-button *ngIf="car.sale_price" class="outline-btn" fill="outline" (click)="buyNow()">
+        {{ 'carDetail.buyNow' | t }}
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

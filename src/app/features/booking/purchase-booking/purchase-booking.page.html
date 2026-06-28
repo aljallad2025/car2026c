@@ -1,0 +1,64 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="speed-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <h1 slot="start" class="toolbar-title">{{ 'booking.purchaseCar' | t }}</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="purchase-content" *ngIf="car">
+  <div class="purchase-wrapper">
+    <div class="car-summary">
+      <div class="car-thumb">
+        <img *ngIf="isValidImageUrl(car.image_url)" [src]="car.image_url" [alt]="(car.make || '') + ' ' + (car.model || '')" />
+        <div *ngIf="!isValidImageUrl(car.image_url)" class="car-fallback"><app-car-placeholder /></div>
+      </div>
+      <div>
+        <h3>{{ car.make }} {{ car.model }}</h3>
+        <p class="sale-price">{{ car.sale_price | number }} <small>{{ 'common.currency' | t }}</small></p>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h4><ion-icon name="cash-outline"></ion-icon>{{ 'booking.paymentMethod' | t }}</h4>
+      <div class="pay-options">
+        <button class="pay-opt" [class.active]="payMethod === 'cash'" (click)="payMethod = 'cash'">
+          <ion-icon name="cash-outline"></ion-icon>{{ 'booking.cash' | t }}
+        </button>
+        <button class="pay-opt" [class.active]="payMethod === 'installment'" (click)="payMethod = 'installment'">
+          <ion-icon name="calendar-outline"></ion-icon>{{ 'booking.installments' | t }}
+        </button>
+        <button class="pay-opt" [class.active]="payMethod === 'finance'" (click)="payMethod = 'finance'">
+          <ion-icon name="business-outline"></ion-icon>{{ 'booking.financing' | t }}
+        </button>
+      </div>
+    </div>
+
+    <div class="section-card" *ngIf="payMethod === 'installment'">
+      <h4><ion-icon name="calendar-outline"></ion-icon>{{ 'booking.installmentOptions' | t }}</h4>
+      <div class="input-group">
+        <label>{{ 'booking.downPayment' | t }} ({{ 'common.currency' | t }})</label>
+        <input type="number" [(ngModel)]="downPayment" />
+      </div>
+      <div class="input-group">
+        <label>{{ 'booking.monthlyInstallments' | t }}</label>
+        <select [(ngModel)]="installmentMonths">
+          <option [value]="12">12 {{ 'booking.months' | t }}</option>
+          <option [value]="24">24 {{ 'booking.months' | t }}</option>
+          <option [value]="36">36 {{ 'booking.months' | t }}</option>
+          <option [value]="48">48 {{ 'booking.months' | t }}</option>
+        </select>
+      </div>
+      <div class="monthly-amount" *ngIf="monthlyInstallment > 0">
+        {{ 'booking.monthlyInstallment' | t }} <strong>{{ monthlyInstallment | number }} {{ 'common.currency' | t }}</strong>
+      </div>
+    </div>
+
+    <ion-button expand="block" [disabled]="loading" class="confirm-btn" (click)="confirm()">
+      <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+      <span *ngIf="!loading">{{ 'booking.confirmPurchase' | t }}</span>
+    </ion-button>
+    <div style="height: 40px;"></div>
+  </div>
+</ion-content>

@@ -1,0 +1,72 @@
+.speed-toolbar {
+  --background: var(--speed-bg);
+  --color: var(--speed-text);
+  --border-color: var(--speed-border);
+}
+
+.toolbar-title {
+  font-size: 17px;
+  font-weight: 800;
+  margin: 0;
+  padding-inline-start: 4px;
+}
+
+.payments-content {
+  --background: var(--speed-bg);
+}
+
+.payments-list {
+  padding: var(--speed-space-4) var(--speed-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--speed-space-2);
+}
+
+.payment-item {
+  background: var(--speed-surface);
+  border: 1px solid var(--speed-border);
+  border-radius: var(--speed-radius-md);
+  padding: var(--speed-space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--speed-space-3);
+
+  .payment-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--speed-radius-sm);
+    background: rgba(220, 38, 38, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-icon {
+      font-size: 19px;
+      color: var(--speed-red-light);
+    }
+  }
+  .payment-info {
+    flex: 1;
+
+    h4 {
+      color: var(--speed-text);
+      font-size: 14.5px;
+      font-weight: 800;
+      margin: 0 0 3px;
+    }
+    p {
+      color: var(--speed-text-faint);
+      font-size: 12px;
+      margin: 0;
+    }
+  }
+  .payment-amount {
+    color: var(--speed-red-light);
+    font-size: 15px;
+    font-weight: 800;
+
+    &.paid {
+      color: var(--speed-success);
+    }
+  }
+}

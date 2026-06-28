@@ -1,0 +1,28 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="speed-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/tabs/profile"></ion-back-button>
+    </ion-buttons>
+    <h1 slot="start" class="toolbar-title">{{ 'payments.myPayments' | t }}</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="payments-content">
+  <div class="payments-list" *ngIf="payments.length">
+    <div class="payment-item" *ngFor="let payment of payments">
+      <div class="payment-icon"><ion-icon name="card-outline"></ion-icon></div>
+      <div class="payment-info">
+        <h4>{{ 'payments.payment' | t }}</h4>
+        <p>{{ payment.created_at | date: 'dd/MM/yyyy' }}</p>
+      </div>
+      <div class="payment-amount" [class.paid]="payment.status === 'paid'">{{ payment.amount | number }} {{ 'common.currency' | t }}</div>
+    </div>
+  </div>
+
+  <div class="speed-empty-state" *ngIf="payments.length === 0">
+    <ion-icon name="wallet-outline"></ion-icon>
+    <h3>{{ 'payments.noPayments' | t }}</h3>
+  </div>
+
+  <div style="height: 100px;"></div>
+</ion-content>

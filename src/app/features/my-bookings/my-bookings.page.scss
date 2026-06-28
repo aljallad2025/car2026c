@@ -1,0 +1,154 @@
+.bookings-content {
+  --background: var(--speed-bg);
+}
+
+.status-segment {
+  margin: 0 var(--speed-space-5) var(--speed-space-4);
+  width: calc(100% - 40px);
+  --background: var(--speed-surface-2);
+  border-radius: var(--speed-radius-sm);
+  padding: 4px;
+
+  ion-segment-button {
+    --color: var(--speed-text-faint);
+    --color-checked: #fff;
+    --background-checked: var(--speed-red);
+    --indicator-color: transparent;
+    border-radius: 9px;
+    min-height: 36px;
+    font-size: 12px;
+  }
+}
+
+.bookings-list {
+  padding: 0 var(--speed-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--speed-space-3);
+}
+
+.booking-card {
+  background: var(--speed-surface);
+  border: 1px solid var(--speed-border);
+  border-radius: var(--speed-radius-lg);
+  padding: var(--speed-space-4);
+}
+
+.booking-header {
+  display: flex;
+  align-items: center;
+  gap: var(--speed-space-3);
+  margin-bottom: var(--speed-space-3);
+
+  .car-thumb {
+    width: 64px;
+    height: 56px;
+    border-radius: var(--speed-radius-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--speed-surface-2);
+  }
+  .car-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .car-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+
+    app-car-placeholder {
+      width: 100%;
+      opacity: 0.5;
+    }
+  }
+  .car-thumb-skel {
+    width: 64px;
+    height: 56px;
+    border-radius: var(--speed-radius-sm);
+    flex-shrink: 0;
+  }
+
+  .booking-info {
+    flex: 1;
+    min-width: 0;
+
+    h4 {
+      color: var(--speed-text);
+      font-size: 14.5px;
+      font-weight: 800;
+      margin: 0 0 4px;
+    }
+    p {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--speed-text-faint);
+      font-size: 11.5px;
+      margin: 0;
+
+      ion-icon {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: var(--speed-radius-sm);
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+
+  &.active {
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--speed-success);
+  }
+  &.pending {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--speed-warning);
+  }
+  &.completed {
+    background: rgba(99, 102, 241, 0.15);
+    color: var(--speed-info);
+  }
+  &.cancelled {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--speed-red-light);
+  }
+}
+
+.booking-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--speed-border);
+  padding-top: var(--speed-space-3);
+
+  .price {
+    color: var(--speed-red-light);
+    font-size: 17px;
+    font-weight: 900;
+
+    small {
+      color: var(--speed-text-faint);
+      font-size: 11px;
+      font-weight: 600;
+    }
+  }
+}
+
+.cancel-btn {
+  padding: 8px 14px;
+  border-radius: var(--speed-radius-sm);
+  border: none;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--speed-text-muted);
+  font-size: 12.5px;
+  font-weight: 700;
+}

@@ -1,0 +1,321 @@
+.detail-content {
+  --background: var(--speed-bg);
+}
+
+.gallery {
+  position: relative;
+  height: 38vh;
+  min-height: 260px;
+  background: var(--speed-surface-2);
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.gallery-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, var(--speed-surface-2), var(--speed-bg));
+  padding: 40px;
+
+  app-car-placeholder {
+    width: 100%;
+    opacity: 0.4;
+  }
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, transparent 25%, transparent 65%, rgba(10, 10, 10, 0.95) 100%);
+}
+
+/* Clear, unmissable back button at the top of every detail/booking screen */
+.back-btn {
+  position: absolute;
+  top: 16px;
+  inset-inline-start: 16px;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--speed-radius-md);
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    font-size: 22px;
+    color: #fff;
+  }
+}
+
+.top-actions {
+  position: absolute;
+  top: 16px;
+  inset-inline-end: 16px;
+  z-index: 3;
+  display: flex;
+  gap: var(--speed-space-2);
+
+  .action-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--speed-radius-md);
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-icon {
+      font-size: 19px;
+      color: #fff;
+
+      &.is-fav {
+        color: var(--speed-red-light);
+      }
+    }
+  }
+}
+
+.sheet {
+  position: relative;
+  z-index: 2;
+  margin-top: -24px;
+  background: var(--speed-surface);
+  border-radius: var(--speed-radius-xl) var(--speed-radius-xl) 0 0;
+  padding: 22px var(--speed-space-5) 0;
+}
+
+.car-header {
+  margin-bottom: var(--speed-space-4);
+}
+
+.brand-tag {
+  color: var(--speed-red-light);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.car-header h1 {
+  color: var(--speed-text);
+  font-size: 24px;
+  font-weight: 900;
+  margin: 4px 0 8px;
+}
+
+.car-meta {
+  display: flex;
+  gap: var(--speed-space-3);
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--speed-text-muted);
+    font-size: 12.5px;
+  }
+  ion-icon {
+    font-size: 14px;
+    color: var(--speed-text-faint);
+  }
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--speed-space-2);
+  margin-bottom: var(--speed-space-5);
+}
+
+.spec {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: var(--speed-surface-2);
+  border: 1px solid var(--speed-border);
+  border-radius: var(--speed-radius-md);
+  padding: 12px 6px;
+
+  ion-icon {
+    font-size: 19px;
+    color: var(--speed-red-light);
+  }
+  .spec-val {
+    color: var(--speed-text);
+    font-size: 12.5px;
+    font-weight: 800;
+    text-transform: capitalize;
+  }
+  .spec-label {
+    color: var(--speed-text-faint);
+    font-size: 10px;
+  }
+}
+
+.tab-switch {
+  display: flex;
+  gap: 6px;
+  margin-bottom: var(--speed-space-5);
+  background: var(--speed-surface-2);
+  border-radius: var(--speed-radius-sm);
+  padding: 4px;
+}
+
+.tab-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--speed-text-faint);
+  font-size: 12.5px;
+  font-weight: 700;
+  border-radius: 9px;
+  min-height: 38px;
+  transition: all 0.15s ease;
+
+  &.active {
+    background: var(--speed-red);
+    color: #fff;
+  }
+}
+
+.tab-content {
+  padding-bottom: 10px;
+
+  .description {
+    color: var(--speed-text-muted);
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0;
+  }
+  .no-data {
+    color: var(--speed-text-disabled);
+    font-size: 13px;
+    text-align: center;
+    padding: 20px 0;
+  }
+}
+
+.feature-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--speed-surface-2);
+  border: 1px solid var(--speed-border);
+  border-radius: var(--speed-radius-sm);
+  padding: 8px 12px;
+  margin: 0 6px 8px 0;
+  color: var(--speed-text);
+  font-size: 12.5px;
+
+  ion-icon {
+    font-size: 14px;
+    color: var(--speed-red-light);
+  }
+}
+
+.review-item {
+  background: var(--speed-surface-2);
+  border-radius: var(--speed-radius-md);
+  padding: 12px 14px;
+  margin-bottom: var(--speed-space-2);
+
+  .reviewer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--speed-text);
+    font-size: 13px;
+    font-weight: 700;
+
+    ion-icon {
+      font-size: 18px;
+      color: var(--speed-text-faint);
+    }
+  }
+  .stars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--speed-warning);
+    font-size: 12px;
+    margin: 4px 0;
+
+    ion-icon {
+      font-size: 13px;
+    }
+  }
+  p {
+    color: var(--speed-text-muted);
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.6;
+  }
+}
+
+.bottom-action {
+  position: fixed;
+  bottom: 0;
+  inset-inline: 0;
+  z-index: 10;
+  background: var(--speed-surface);
+  border-top: 1px solid var(--speed-border);
+  padding: var(--speed-space-4) var(--speed-space-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--speed-space-4);
+}
+
+.price-info {
+  .price {
+    color: var(--speed-text);
+    font-size: 22px;
+    font-weight: 900;
+    white-space: nowrap;
+
+    small {
+      color: var(--speed-text-faint);
+      font-size: 12px;
+      font-weight: 600;
+      margin-inline-start: 4px;
+    }
+  }
+}
+
+.action-btns {
+  display: flex;
+  gap: var(--speed-space-2);
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.primary-btn {
+  --background: linear-gradient(135deg, var(--speed-red), var(--speed-red-dark));
+  --background-activated: #7f1d1d;
+  --border-radius: var(--speed-radius-md);
+  height: 48px;
+  font-weight: 800;
+  font-size: 14px;
+  --box-shadow: 0 8px 20px var(--speed-red-glow);
+}
+
+.outline-btn {
+  --color: var(--speed-red-light);
+  --border-color: var(--speed-red);
+  --border-radius: var(--speed-radius-md);
+  height: 48px;
+  font-weight: 800;
+  font-size: 14px;
+}

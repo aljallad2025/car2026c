@@ -1,0 +1,72 @@
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+@import "@ionic/angular/css/display.css";
+
+html,
+body {
+  font-family: var(--ion-font-family);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ion-content {
+  --background: var(--speed-bg);
+}
+
+ion-skeleton-text {
+  --background: var(--speed-surface-2);
+  --background-rgb: 28, 28, 28;
+  border-radius: var(--speed-radius-sm);
+}
+
+.speed-page-header {
+  padding: var(--speed-space-5) var(--speed-space-5) var(--speed-space-3);
+
+  h1 {
+    color: var(--speed-text);
+    font-size: 22px;
+    font-weight: 900;
+    margin: 0;
+  }
+}
+
+.speed-card {
+  background: var(--speed-surface);
+  border: 1px solid var(--speed-border);
+  border-radius: var(--speed-radius-lg);
+}
+
+.speed-empty-state {
+  text-align: center;
+  padding: 64px var(--speed-space-5);
+  color: var(--speed-text-disabled);
+
+  ion-icon {
+    font-size: 48px;
+    margin-bottom: var(--speed-space-3);
+    color: var(--speed-surface-2);
+  }
+
+  p,
+  h3 {
+    color: var(--speed-text-faint);
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+.speed-toolbar {
+  --background: var(--speed-bg);
+  --color: var(--speed-text);
+  --border-color: var(--speed-border);
+}

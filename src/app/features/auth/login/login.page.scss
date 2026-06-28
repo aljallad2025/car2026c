@@ -1,0 +1,177 @@
+.login-content {
+  --background: var(--speed-bg);
+}
+
+.hero-section {
+  position: relative;
+  height: 42vh;
+  min-height: 260px;
+  background: linear-gradient(160deg, var(--speed-surface-2) 0%, var(--speed-bg) 60%);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: var(--speed-space-2);
+}
+
+.hero-glow {
+  position: absolute;
+  bottom: -40%;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  width: 130%;
+  height: 70%;
+  background: radial-gradient(ellipse at center, rgba(220, 38, 38, 0.55) 0%, rgba(220, 38, 38, 0.15) 45%, transparent 75%);
+  filter: blur(10px);
+}
+
+.hero-image {
+  position: relative;
+  z-index: 1;
+  width: 88%;
+  max-width: 400px;
+  filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.6));
+  animation: speed-drive-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes speed-drive-in {
+  0% { transform: translateX(40%) scale(0.9); opacity: 0; }
+  100% { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+.hero-logo {
+  position: absolute;
+  top: 16px;
+  inset-inline-start: 20px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: var(--speed-space-1);
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--speed-text);
+  letter-spacing: -0.5px;
+
+  ion-icon { color: var(--speed-red); font-size: 20px; }
+}
+
+.sheet {
+  position: relative;
+  z-index: 2;
+  margin-top: -28px;
+  background: var(--speed-surface);
+  border-radius: var(--speed-radius-xl) var(--speed-radius-xl) 0 0;
+  padding: var(--speed-space-6) var(--speed-space-5) var(--speed-space-5);
+  border-top: 1px solid var(--speed-border);
+}
+
+.sheet-title {
+  color: var(--speed-text);
+  font-size: 26px;
+  font-weight: 900;
+  margin: 0 0 4px;
+}
+
+.sheet-subtitle {
+  color: var(--speed-text-faint);
+  font-size: 14px;
+  margin: 0 0 var(--speed-space-5);
+}
+
+.type-segment {
+  margin-bottom: var(--speed-space-4);
+  --background: var(--speed-surface-2);
+  border-radius: var(--speed-radius-sm);
+  padding: 4px;
+
+  ion-segment-button {
+    --color: var(--speed-text-faint);
+    --color-checked: #fff;
+    --background-checked: var(--speed-red);
+    --indicator-color: transparent;
+    border-radius: 9px;
+    min-height: 40px;
+    font-size: 12.5px;
+
+    ion-icon { font-size: 15px; margin-bottom: 2px; }
+  }
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background: var(--speed-surface-2);
+  border-radius: var(--speed-radius-md);
+  padding: 13px var(--speed-space-4);
+  margin-bottom: var(--speed-space-3);
+  border: 1px solid var(--speed-border);
+  transition: border-color 0.2s ease;
+
+  &:focus-within { border-color: var(--speed-red); }
+  ion-icon { color: var(--speed-text-faint); margin-inline-end: 10px; font-size: 19px; flex-shrink: 0; }
+  ion-input { flex: 1; --color: var(--speed-text); --placeholder-color: var(--speed-text-disabled); font-size: 15px; }
+  .eye-icon { cursor: pointer; margin: 0; }
+}
+
+.forgot-link {
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: end;
+  width: 100%;
+  color: var(--speed-red-light);
+  font-size: 13px;
+  margin-bottom: var(--speed-space-5);
+  font-weight: 700;
+}
+
+.login-btn {
+  height: 54px;
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: var(--speed-space-5);
+  --background: linear-gradient(135deg, var(--speed-red), var(--speed-red-dark));
+  --background-activated: #7f1d1d;
+  --border-radius: var(--speed-radius-md);
+  --box-shadow: 0 10px 28px var(--speed-red-glow);
+
+  ion-icon { margin-inline-start: 6px; }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 4px 0 var(--speed-space-5);
+
+  &::before, &::after { content: ''; flex: 1; height: 1px; background: var(--speed-border); }
+  span { padding: 0 var(--speed-space-3); color: var(--speed-text-disabled); font-size: 13px; }
+}
+
+.guest-btn {
+  width: 100%;
+  height: 50px;
+  border-radius: var(--speed-radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px dashed var(--speed-border-strong);
+  color: var(--speed-text-muted);
+  font-size: 14.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--speed-space-2);
+  margin-bottom: var(--speed-space-5);
+
+  ion-icon { font-size: 18px; }
+  &:active { background: rgba(255, 255, 255, 0.07); transform: scale(0.98); }
+}
+
+.register-link {
+  text-align: center;
+  color: var(--speed-text-faint);
+  font-size: 14px;
+
+  button { background: none; border: none; padding: 0; color: var(--speed-red-light); font-weight: 800; font-size: 14px; }
+}

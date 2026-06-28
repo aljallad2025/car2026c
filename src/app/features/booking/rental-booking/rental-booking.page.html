@@ -1,0 +1,89 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="speed-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <h1 slot="start" class="toolbar-title">{{ 'booking.rentalBooking' | t }}</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="booking-content">
+  <div class="booking-wrapper" *ngIf="car">
+    <div class="car-summary">
+      <div class="car-thumb">
+        <img *ngIf="isValidImageUrl(car.image_url)" [src]="car.image_url" [alt]="(car.make || '') + ' ' + (car.model || '')" />
+        <div *ngIf="!isValidImageUrl(car.image_url)" class="car-fallback"><app-car-placeholder /></div>
+      </div>
+      <div>
+        <h3>{{ car.make }} {{ car.model }}</h3>
+        <p><strong>{{ car.daily_rate }}</strong> {{ 'common.currency' | t }} / {{ 'common.day' | t }}</p>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h4><ion-icon name="calendar-outline"></ion-icon>{{ 'booking.rentalDates' | t }}</h4>
+      <div class="date-inputs">
+        <div class="date-input">
+          <label>{{ 'booking.pickupDate' | t }}</label>
+          <input type="date" [(ngModel)]="pickupDate" />
+        </div>
+        <div class="date-input">
+          <label>{{ 'booking.returnDate' | t }}</label>
+          <input type="date" [(ngModel)]="returnDate" />
+        </div>
+      </div>
+      <div class="days-badge" *ngIf="totalDays > 0">{{ totalDays }} {{ 'common.days' | t }}</div>
+    </div>
+
+    <div class="section-card">
+      <h4><ion-icon name="location-outline"></ion-icon>{{ 'booking.locations' | t }}</h4>
+      <input class="text-input" [placeholder]="'booking.pickupLocation' | t" [(ngModel)]="pickupLocation" />
+      <input class="text-input" [placeholder]="'booking.returnLocation' | t" [(ngModel)]="returnLocation" style="margin-top: 10px;" />
+    </div>
+
+    <div class="section-card">
+      <h4><ion-icon name="add-circle-outline"></ion-icon>{{ 'booking.extras' | t }}</h4>
+      <div class="extra-item" *ngFor="let extra of extras" [class.selected]="extra.selected" (click)="toggleExtra(extra)">
+        <ion-icon [name]="extra.icon" class="extra-icon"></ion-icon>
+        <span class="extra-name">{{ extra.nameKey | t }}</span>
+        <span class="extra-price">{{ extra.price }} {{ 'common.currency' | t }}/{{ 'common.day' | t }}</span>
+        <ion-icon [name]="extra.selected ? 'checkmark-circle' : 'square-outline'" class="check"></ion-icon>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h4><ion-icon name="card-outline"></ion-icon>{{ 'booking.paymentMethod' | t }}</h4>
+      <div class="payment-options">
+        <button class="pay-option" [class.active]="paymentMethod === 'cash'" (click)="paymentMethod = 'cash'">
+          <ion-icon name="cash-outline"></ion-icon>{{ 'booking.cash' | t }}
+        </button>
+        <button class="pay-option" [class.active]="paymentMethod === 'card'" (click)="paymentMethod = 'card'">
+          <ion-icon name="card-outline"></ion-icon>{{ 'booking.card' | t }}
+        </button>
+        <button class="pay-option" [class.active]="paymentMethod === 'transfer'" (click)="paymentMethod = 'transfer'">
+          <ion-icon name="business-outline"></ion-icon>{{ 'booking.transfer' | t }}
+        </button>
+      </div>
+    </div>
+
+    <div class="price-summary" *ngIf="totalDays > 0">
+      <div class="price-row">
+        <span>{{ 'booking.rental' | t }} ({{ totalDays }} × {{ car.daily_rate }})</span>
+        <span>{{ car.daily_rate! * totalDays }} {{ 'common.currency' | t }}</span>
+      </div>
+      <div class="price-row" *ngFor="let extra of selectedExtras">
+        <span>{{ extra.nameKey | t }}</span>
+        <span>{{ extra.price * totalDays }} {{ 'common.currency' | t }}</span>
+      </div>
+      <div class="price-total">
+        <span>{{ 'booking.total' | t }}</span>
+        <span>{{ totalPrice }} {{ 'common.currency' | t }}</span>
+      </div>
+    </div>
+
+    <ion-button expand="block" [disabled]="loading || !pickupDate || !returnDate" class="confirm-btn" (click)="confirm()">
+      {{ loading ? ('booking.booking' | t) : (('booking.confirmBooking' | t) + ' - ' + totalPrice + ' ' + ('common.currency' | t)) }}
+    </ion-button>
+    <div style="height: 40px;"></div>
+  </div>
+</ion-content>

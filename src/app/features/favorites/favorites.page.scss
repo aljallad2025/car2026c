@@ -1,0 +1,76 @@
+.speed-toolbar {
+  --background: var(--speed-bg);
+  --color: var(--speed-text);
+  --border-color: var(--speed-border);
+}
+
+.toolbar-title {
+  font-size: 17px;
+  font-weight: 800;
+  margin: 0;
+  padding-inline-start: 4px;
+}
+
+.favorites-content {
+  --background: var(--speed-bg);
+}
+
+.cars-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--speed-space-3);
+  padding: var(--speed-space-4) var(--speed-space-5);
+}
+
+.car-item {
+  background: var(--speed-surface);
+  border: 1px solid var(--speed-border);
+  border-radius: var(--speed-radius-lg);
+  padding: var(--speed-space-3);
+
+  .car-thumb {
+    height: 90px;
+    border-radius: var(--speed-radius-md);
+    overflow: hidden;
+    margin-bottom: var(--speed-space-2);
+    background: var(--speed-surface-2);
+  }
+  .car-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .car-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+    app-car-placeholder {
+      width: 100%;
+      opacity: 0.5;
+    }
+  }
+  h4 {
+    color: var(--speed-text);
+    font-size: 13.5px;
+    font-weight: 800;
+    margin: 0 0 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  p {
+    color: var(--speed-text-muted);
+    font-size: 11.5px;
+    margin: 0;
+
+    strong {
+      color: var(--speed-red-light);
+      font-size: 14px;
+      font-weight: 900;
+    }
+  }
+}

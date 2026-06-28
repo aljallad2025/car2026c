@@ -1,0 +1,27 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="speed-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/tabs/profile"></ion-back-button>
+    </ion-buttons>
+    <h1 slot="start" class="toolbar-title">{{ 'chat.support' | t }}</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="chat-content">
+  <div class="messages">
+    <div class="welcome-msg">
+      <div class="bot-avatar"><ion-icon name="headset-outline"></ion-icon></div>
+      <p>{{ 'chat.welcomeMessage' | t }}</p>
+    </div>
+
+    <div class="message" *ngFor="let msg of messages" [class.mine]="!msg.is_admin" [class.theirs]="msg.is_admin">
+      <div class="bubble">{{ msg.message }}</div>
+      <span class="time">{{ msg.created_at | date: 'HH:mm' }}</span>
+    </div>
+  </div>
+</ion-content>
+
+<div class="chat-input">
+  <ion-input [(ngModel)]="newMessage" [placeholder]="'chat.typeMessage' | t" (keyup.enter)="send()"></ion-input>
+  <button (click)="send()" [disabled]="!newMessage.trim()"><ion-icon name="send-outline"></ion-icon></button>
+</div>

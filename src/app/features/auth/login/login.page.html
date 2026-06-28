@@ -1,0 +1,74 @@
+<ion-content [fullscreen]="true" class="login-content">
+  <div class="hero-section">
+    <div class="hero-logo">
+      <ion-icon name="flash"></ion-icon>
+      <span>SPEED</span>
+    </div>
+    <div class="hero-glow"></div>
+    <div class="hero-image">
+      <app-car-placeholder />
+    </div>
+  </div>
+
+  <div class="sheet">
+    <h2 class="sheet-title">{{ 'auth.signIn' | t }}</h2>
+    <p class="sheet-subtitle">{{ 'auth.signInSubtitle' | t }}</p>
+
+    <ion-segment [(ngModel)]="loginType" mode="md" class="type-segment">
+      <ion-segment-button value="email">
+        <ion-icon name="mail-outline"></ion-icon>
+        <ion-label>{{ 'auth.email' | t }}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="phone">
+        <ion-icon name="phone-portrait-outline"></ion-icon>
+        <ion-label>{{ 'auth.phone' | t }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="input-group" *ngIf="loginType === 'email'">
+      <ion-icon name="mail-outline"></ion-icon>
+      <ion-input [(ngModel)]="email" type="email" [placeholder]="'auth.emailAddress' | t" dir="ltr"></ion-input>
+    </div>
+    <div class="input-group" *ngIf="loginType === 'phone'">
+      <ion-icon name="phone-portrait-outline"></ion-icon>
+      <ion-input [(ngModel)]="phone" type="tel" placeholder="+973XXXXXXXX" dir="ltr"></ion-input>
+    </div>
+
+    <div class="input-group">
+      <ion-icon name="lock-closed-outline"></ion-icon>
+      <ion-input
+        [(ngModel)]="password"
+        [type]="showPassword ? 'text' : 'password'"
+        [placeholder]="'auth.password' | t"
+        dir="ltr"
+      ></ion-input>
+      <ion-icon
+        [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
+        (click)="showPassword = !showPassword"
+        class="eye-icon"
+      ></ion-icon>
+    </div>
+
+    <button class="forgot-link" (click)="goToForgotPassword()">{{ 'auth.forgotPassword' | t }}</button>
+
+    <ion-button expand="block" [disabled]="loading" class="login-btn" (click)="login()">
+      <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+      <ng-container *ngIf="!loading">
+        <span>{{ 'auth.signIn' | t }}</span>
+        <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+      </ng-container>
+    </ion-button>
+
+    <div class="divider"><span>{{ 'common.or' | t }}</span></div>
+
+    <button class="guest-btn" (click)="continueAsGuest()">
+      <ion-icon name="person-outline"></ion-icon>
+      <span>{{ 'auth.continueAsGuest' | t }}</span>
+    </button>
+
+    <div class="register-link">
+      {{ 'auth.noAccount' | t }}
+      <button (click)="goToRegister()">{{ 'auth.signUp' | t }}</button>
+    </div>
+  </div>
+</ion-content>

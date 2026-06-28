@@ -1,0 +1,182 @@
+.register-content {
+  --background: var(--speed-bg);
+}
+
+.speed-toolbar {
+  --background: transparent;
+  --border-width: 0;
+}
+
+.hero-section {
+  position: relative;
+  height: 24vh;
+  min-height: 170px;
+  background: linear-gradient(160deg, var(--speed-surface-2) 0%, var(--speed-bg) 70%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-glow {
+  position: absolute;
+  top: -30%;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  width: 120%;
+  height: 90%;
+  background: radial-gradient(ellipse at center, rgba(220, 38, 38, 0.45) 0%, transparent 70%);
+  filter: blur(10px);
+}
+
+.logo-badge {
+  position: relative;
+  z-index: 1;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--speed-radius-lg);
+  background: linear-gradient(145deg, var(--speed-red) 0%, var(--speed-red-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 14px 32px var(--speed-red-glow);
+
+  ion-icon { font-size: 30px; color: #fff; }
+}
+
+.sheet {
+  position: relative;
+  z-index: 2;
+  margin-top: -20px;
+  background: var(--speed-surface);
+  border-radius: var(--speed-radius-xl) var(--speed-radius-xl) 0 0;
+  padding: var(--speed-space-6) var(--speed-space-5) var(--speed-space-5);
+  border-top: 1px solid var(--speed-border);
+}
+
+.sheet-title {
+  color: var(--speed-text);
+  font-size: 22px;
+  font-weight: 900;
+  margin: 0 0 4px;
+  text-align: center;
+}
+
+.sheet-subtitle {
+  color: var(--speed-text-faint);
+  font-size: 13.5px;
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+.section-label {
+  color: var(--speed-text-disabled);
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin: var(--speed-space-4) 4px var(--speed-space-2);
+
+  .optional { color: #3f3f46; font-weight: 500; text-transform: none; }
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background: var(--speed-surface-2);
+  border-radius: var(--speed-radius-md);
+  padding: 13px var(--speed-space-4);
+  margin-bottom: var(--speed-space-3);
+  border: 1px solid var(--speed-border);
+  transition: border-color 0.2s ease;
+
+  &:focus-within { border-color: var(--speed-red); }
+  ion-icon { color: var(--speed-text-faint); margin-inline-end: 10px; font-size: 19px; flex-shrink: 0; }
+  ion-input { flex: 1; --color: var(--speed-text); --placeholder-color: var(--speed-text-disabled); font-size: 15px; }
+  .eye-icon { cursor: pointer; margin: 0; }
+}
+
+.upload-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--speed-space-3);
+  margin-bottom: 6px;
+}
+
+.upload-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 86px;
+  border-radius: var(--speed-radius-md);
+  background: var(--speed-surface-2);
+  border: 1.5px dashed var(--speed-border-strong);
+  text-align: center;
+  padding: var(--speed-space-2);
+
+  input[type='file'] { position: absolute; inset: 0; opacity: 0; }
+  ion-icon { font-size: 24px; color: var(--speed-text-faint); }
+  span { font-size: 11.5px; color: var(--speed-text-muted); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  &.has-file {
+    border-style: solid;
+    border-color: var(--speed-red);
+    background: rgba(220, 38, 38, 0.12);
+
+    ion-icon, span { color: var(--speed-red-light); }
+    span { font-weight: 600; }
+  }
+}
+
+.register-btn {
+  height: 54px;
+  font-size: 16px;
+  font-weight: 800;
+  margin: var(--speed-space-5) 0 var(--speed-space-4);
+  --background: linear-gradient(135deg, var(--speed-red), var(--speed-red-dark));
+  --background-activated: #7f1d1d;
+  --border-radius: var(--speed-radius-md);
+  --box-shadow: 0 10px 28px var(--speed-red-glow);
+
+  ion-icon { margin-inline-start: 6px; }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0 0 var(--speed-space-4);
+
+  &::before, &::after { content: ''; flex: 1; height: 1px; background: var(--speed-border); }
+  span { padding: 0 var(--speed-space-3); color: var(--speed-text-disabled); font-size: 13px; }
+}
+
+.guest-btn {
+  width: 100%;
+  height: 50px;
+  border-radius: var(--speed-radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px dashed var(--speed-border-strong);
+  color: var(--speed-text-muted);
+  font-size: 14.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--speed-space-2);
+  margin-bottom: var(--speed-space-4);
+
+  ion-icon { font-size: 18px; }
+  &:active { background: rgba(255, 255, 255, 0.07); transform: scale(0.98); }
+}
+
+.login-link {
+  text-align: center;
+  color: var(--speed-text-faint);
+  font-size: 14px;
+
+  button { background: none; border: none; padding: 0; color: var(--speed-red-light); font-weight: 800; font-size: 14px; }
+}

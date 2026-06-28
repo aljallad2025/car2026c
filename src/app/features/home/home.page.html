@@ -1,0 +1,103 @@
+<ion-content [fullscreen]="true" class="home-content">
+  <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="top-bar">
+    <div class="user-block">
+      <p class="greeting">{{ 'home.welcome' | t }} 👋</p>
+      <h2 class="user-name">{{ isGuest ? ('home.guest' | t) : (currentUser?.full_name || ('home.user' | t)) }}</h2>
+    </div>
+    <button class="notif-btn">
+      <ion-icon name="notifications-outline"></ion-icon>
+      <span class="dot"></span>
+    </button>
+  </div>
+
+  <button class="search-bar" (click)="goToSearch()">
+    <ion-icon name="search-outline"></ion-icon>
+    <span>{{ 'home.searchPlaceholder' | t }}</span>
+  </button>
+
+  <div class="hero-strip" *ngIf="!loading && featuredCars.length">
+    <div class="hero-scroll">
+      <div class="hero-card" *ngFor="let car of featuredCars" (click)="goToCar(car)">
+        <img *ngIf="isValidImageUrl(car.image_url)" [src]="car.image_url" [alt]="(car.make || '') + ' ' + (car.model || '')" />
+        <div *ngIf="!isValidImageUrl(car.image_url)" class="hero-fallback"><app-car-placeholder /></div>
+        <div class="hero-overlay"></div>
+        <span class="hero-tag">SPEED</span>
+        <div class="hero-info">
+          <h3>{{ car.make }} {{ car.model }}</h3>
+          <div class="hero-price"><span>{{ car.daily_rate }}</span> {{ 'common.currency' | t }} / {{ 'common.day' | t }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-strip" *ngIf="loading">
+    <div class="hero-scroll">
+      <ion-skeleton-text *ngFor="let i of [1, 2]" animated class="hero-skeleton"></ion-skeleton-text>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 class="section-title">{{ 'home.categories' | t }}</h3>
+    <div class="categories-scroll">
+      <button
+        *ngFor="let category of categories"
+        class="category-chip"
+        [class.active]="selectedCategory === category.value"
+        (click)="selectCategory(category.value)"
+      >
+        <ion-icon name="car-sport-outline"></ion-icon>
+        <span>{{ category.labelKey | t }}</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <h3 class="section-title">{{ 'home.mostPopular' | t }}</h3>
+      <button class="see-all" (click)="goToSearch()">
+        {{ 'home.seeAll' | t }} <ion-icon name="arrow-forward-outline"></ion-icon>
+      </button>
+    </div>
+
+    <div class="car-list" *ngIf="!loading">
+      <div class="car-card" *ngFor="let car of popularCars" (click)="goToCar(car)">
+        <div class="car-thumb">
+          <img *ngIf="isValidImageUrl(car.image_url)" [src]="car.image_url" [alt]="(car.make || '') + ' ' + (car.model || '')" />
+          <div *ngIf="!isValidImageUrl(car.image_url)" class="car-fallback"><app-car-placeholder /></div>
+        </div>
+        <div class="car-body">
+          <h4>{{ car.make }} {{ car.model }}</h4>
+          <div class="car-specs">
+            <span><ion-icon name="settings-outline"></ion-icon>{{ (car.transmission === 'automatic' ? 'cars.automatic' : 'cars.manual') | t }}</span>
+            <span><ion-icon name="people-outline"></ion-icon>{{ car.seats }} {{ 'common.seats' | t }}</span>
+          </div>
+          <div class="car-footer">
+            <div class="car-price"><strong>{{ car.daily_rate }}</strong> {{ 'common.currency' | t }}/{{ 'common.day' | t }}</div>
+            <span class="car-arrow"><ion-icon name="arrow-forward-outline"></ion-icon></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="car-list" *ngIf="loading">
+      <div class="car-card skeleton" *ngFor="let i of [1, 2, 3]">
+        <ion-skeleton-text animated class="car-thumb-skel"></ion-skeleton-text>
+        <div class="car-body">
+          <ion-skeleton-text animated style="width: 70%; height: 16px;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 50%; height: 12px; margin-top: 8px;"></ion-skeleton-text>
+        </div>
+      </div>
+    </div>
+
+    <div class="speed-empty-state" *ngIf="!loading && !popularCars.length">
+      <ion-icon name="car-sport-outline"></ion-icon>
+      <p>{{ 'home.noCarsAvailable' | t }}</p>
+    </div>
+  </div>
+
+  <div style="height: 90px;"></div>
+</ion-content>

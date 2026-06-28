@@ -1,0 +1,177 @@
+.speed-toolbar {
+  --background: var(--speed-bg);
+  --color: var(--speed-text);
+  --border-color: var(--speed-border);
+}
+
+.toolbar-title {
+  font-size: 17px;
+  font-weight: 800;
+  margin: 0;
+  padding-inline-start: 4px;
+}
+
+.purchase-content {
+  --background: var(--speed-bg);
+}
+
+.purchase-wrapper {
+  padding: var(--speed-space-4) var(--speed-space-5) 0;
+}
+
+.car-summary {
+  display: flex;
+  align-items: center;
+  gap: var(--speed-space-4);
+  background: var(--speed-surface);
+  border: 1px solid var(--speed-border);
+  border-radius: var(--speed-radius-lg);
+  padding: var(--speed-space-4);
+  margin-bottom: var(--speed-space-5);
+
+  .car-thumb {
+    width: 80px;
+    height: 66px;
+    border-radius: var(--speed-radius-md);
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--speed-surface-2);
+  }
+  .car-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .car-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+
+    app-car-placeholder {
+      width: 100%;
+      opacity: 0.5;
+    }
+  }
+
+  h3 {
+    color: var(--speed-text);
+    font-size: 16px;
+    font-weight: 800;
+    margin: 0 0 4px;
+  }
+  .sale-price {
+    color: var(--speed-red-light);
+    font-size: 20px;
+    font-weight: 900;
+    margin: 0;
+
+    small {
+      font-size: 12px;
+      color: var(--speed-text-faint);
+      font-weight: 600;
+    }
+  }
+}
+
+.section-card {
+  background: var(--speed-surface);
+  border: 1px solid var(--speed-border);
+  border-radius: var(--speed-radius-lg);
+  padding: var(--speed-space-4);
+  margin-bottom: var(--speed-space-3);
+
+  h4 {
+    display: flex;
+    align-items: center;
+    gap: var(--speed-space-2);
+    color: var(--speed-text);
+    font-size: 14.5px;
+    font-weight: 800;
+    margin: 0 0 var(--speed-space-4);
+
+    ion-icon {
+      font-size: 17px;
+      color: var(--speed-red-light);
+    }
+  }
+}
+
+.pay-options {
+  display: flex;
+  gap: var(--speed-space-2);
+
+  .pay-opt {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+    padding: 12px 6px;
+    background: var(--speed-surface-2);
+    border-radius: var(--speed-radius-sm);
+    border: 1px solid var(--speed-border);
+    color: var(--speed-text-muted);
+    font-size: 12px;
+    font-weight: 600;
+
+    ion-icon {
+      font-size: 19px;
+      color: var(--speed-text-faint);
+    }
+
+    &.active {
+      border-color: var(--speed-red);
+      background: rgba(220, 38, 38, 0.1);
+      color: var(--speed-text);
+
+      ion-icon {
+        color: var(--speed-red-light);
+      }
+    }
+  }
+}
+
+.input-group {
+  margin-bottom: var(--speed-space-3);
+
+  label {
+    color: var(--speed-text-faint);
+    font-size: 12px;
+    display: block;
+    margin-bottom: 6px;
+  }
+  input,
+  select {
+    background: var(--speed-surface-2);
+    border: 1px solid var(--speed-border);
+    border-radius: var(--speed-radius-sm);
+    padding: 11px 12px;
+    color: var(--speed-text);
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+.monthly-amount {
+  color: var(--speed-success);
+  font-size: 13.5px;
+  margin-top: var(--speed-space-2);
+
+  strong {
+    font-size: 17px;
+  }
+}
+
+.confirm-btn {
+  height: 54px;
+  font-size: 15px;
+  font-weight: 800;
+  --background: linear-gradient(135deg, var(--speed-red), var(--speed-red-dark));
+  --background-activated: #7f1d1d;
+  --border-radius: var(--speed-radius-md);
+  --box-shadow: 0 10px 26px var(--speed-red-glow);
+}

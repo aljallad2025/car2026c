@@ -1,0 +1,95 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="speed-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/auth/login"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="register-content">
+  <div class="hero-section">
+    <div class="hero-glow"></div>
+    <div class="logo-badge"><ion-icon name="person-add-outline"></ion-icon></div>
+  </div>
+
+  <div class="sheet">
+    <h2 class="sheet-title">{{ 'auth.createAccount' | t }}</h2>
+    <p class="sheet-subtitle">{{ 'auth.createAccountSubtitle' | t }}</p>
+
+    <p class="section-label">{{ 'auth.personalInfo' | t }}</p>
+    <div class="input-group">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-input [(ngModel)]="fullName" [placeholder]="'auth.fullName' | t"></ion-input>
+    </div>
+    <div class="input-group">
+      <ion-icon name="mail-outline"></ion-icon>
+      <ion-input [(ngModel)]="email" type="email" [placeholder]="'auth.emailAddress' | t"></ion-input>
+    </div>
+    <div class="input-group">
+      <ion-icon name="phone-portrait-outline"></ion-icon>
+      <ion-input [(ngModel)]="phone" type="tel" placeholder="+973XXXXXXXX"></ion-input>
+    </div>
+
+    <p class="section-label">{{ 'auth.password' | t }}</p>
+    <div class="input-group">
+      <ion-icon name="lock-closed-outline"></ion-icon>
+      <ion-input
+        [(ngModel)]="password"
+        [type]="showPassword ? 'text' : 'password'"
+        [placeholder]="'auth.password' | t"
+      ></ion-input>
+      <ion-icon
+        [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
+        (click)="showPassword = !showPassword"
+        class="eye-icon"
+      ></ion-icon>
+    </div>
+    <div class="input-group">
+      <ion-icon name="lock-closed-outline"></ion-icon>
+      <ion-input
+        [(ngModel)]="confirmPassword"
+        [type]="showConfirmPassword ? 'text' : 'password'"
+        [placeholder]="'auth.confirmPassword' | t"
+      ></ion-input>
+      <ion-icon
+        [name]="showConfirmPassword ? 'eye-outline' : 'eye-off-outline'"
+        (click)="showConfirmPassword = !showConfirmPassword"
+        class="eye-icon"
+      ></ion-icon>
+    </div>
+
+    <p class="section-label">{{ 'auth.documents' | t }} <span class="optional">{{ 'auth.optional' | t }}</span></p>
+    <div class="upload-grid">
+      <label class="upload-box" [class.has-file]="idCardFile">
+        <input type="file" accept="image/*" (change)="onFileChange($event, 'id')" />
+        <ion-icon name="card-outline"></ion-icon>
+        <span>{{ idCardFile ? idCardFile.name : ('auth.idPhoto' | t) }}</span>
+      </label>
+      <label class="upload-box" [class.has-file]="licenseFile">
+        <input type="file" accept="image/*" (change)="onFileChange($event, 'license')" />
+        <ion-icon name="document-text-outline"></ion-icon>
+        <span>{{ licenseFile ? licenseFile.name : ('auth.drivingLicense' | t) }}</span>
+      </label>
+    </div>
+
+    <ion-button expand="block" [disabled]="loading" class="register-btn" (click)="register()">
+      <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+      <ng-container *ngIf="!loading">
+        <span>{{ 'auth.createAccount' | t }}</span>
+        <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+      </ng-container>
+    </ion-button>
+
+    <div class="divider"><span>{{ 'common.or' | t }}</span></div>
+
+    <button class="guest-btn" (click)="continueAsGuest()">
+      <ion-icon name="person-outline"></ion-icon>
+      <span>{{ 'auth.continueAsGuest' | t }}</span>
+    </button>
+
+    <div class="login-link">
+      {{ 'auth.alreadyHaveAccount' | t }}
+      <button (click)="goToLogin()">{{ 'auth.signIn' | t }}</button>
+    </div>
+  </div>
+</ion-content>
